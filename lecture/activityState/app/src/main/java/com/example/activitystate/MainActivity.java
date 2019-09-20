@@ -2,6 +2,7 @@ package com.example.activitystate;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button buttonIncrement;
+    private Button nextAct;
     private TextView textViewer;
     private int counter = 0;
 
@@ -21,10 +23,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d("lifecycle", "onCreate");
 
         buttonIncrement = findViewById(R.id.button);
+        nextAct = findViewById(R.id.button2);
         textViewer = findViewById(R.id.textView);
 
         buttonIncrement.setOnClickListener(this);
         textViewer.setText(String.valueOf(counter));
+
+        nextAct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+                intent.putExtra("cnt_val", counter);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
