@@ -3,9 +3,11 @@ package com.example.reddit;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.solver.widgets.ConstraintHorizontalLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -33,8 +35,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull MainViewHolder holder, final int position) {
         holder.textViewDataSub.setText(data.get(position).subReddit);
-        holder.textViewDataName.append(data.get(position).user);
-        holder.textViewDataDate.append(data.get(position).postDate);
+        holder.textViewDataName.setText("Posted by: " + data.get(position).user);
+        holder.textViewDataDate.setText("Posted on: " + data.get(position).postDate);
+        holder.textViewDescription.setText(data.get(position).postText);
         holder.setItemClick(data.get(position));
     }
 
@@ -45,32 +48,27 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class MainViewHolder extends RecyclerView.ViewHolder {
 
+        private LinearLayout post;
         private TextView textViewDataSub;
         private TextView textViewDataName;
         private TextView textViewDataDate;
-//        private TextView textViewDataSub;
+        private TextView textViewDescription;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
+            post = itemView.findViewById(R.id.postId);
             textViewDataSub = itemView.findViewById(R.id.textViewDataSub);
             textViewDataName = itemView.findViewById(R.id.textViewDataName);
             textViewDataDate = itemView.findViewById(R.id.textViewDataDate);
+            textViewDescription = itemView.findViewById(R.id.textViewDescription);
         }
 
-        public void setItemClick(final Post item) {
-            textViewDataSub.setOnClickListener(new View.OnClickListener() {
+        public void setItemClick(final Post post) {
+            this.post.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (itemClickListener != null) {
-                        itemClickListener.onItemClick(item.subReddit, getAdapterPosition());
-                    }
-                }
-            });
-            textViewDataName.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (itemClickListener != null) {
-                        itemClickListener.onItemClick(item.user, getAdapterPosition());
+                    if(itemClickListener != null) {
+                        itemClickListener.onItemClick(post.toString(), getAdapterPosition());
                     }
                 }
             });
