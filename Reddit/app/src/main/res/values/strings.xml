@@ -1,0 +1,12 @@
+<resources>
+    <string name="feed_home">Home</string>
+    <string name="feed_popular">Popular</string>
+    <string name="app_name">Reddit</string>
+    <string name="title_home">Home</string>
+    <string name="title_subscriptions">SubReddits</string>
+    <string name="title_chat">Chat</string>
+    <string name="title_inbox">Inbox</string>
+    <string name="title_activity_second">SecondActivity</string>
+    <string name="postedBy">Posted by:</string>
+    <string name="postedOn">Posted on: </string>
+</resources>
